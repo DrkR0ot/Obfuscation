@@ -1,22 +1,13 @@
-﻿# Fonction d'obfuscation de la commande
+# Fonction d'obfuscation de la commande
 function Obfuscate-Command {
-    param([string]$cmd)
 
-    # Appliquer les remplacements classiques
-    $obfuscated = $cmd -replace "`t", "%09" `
-                       -replace " ", '$env:PROGRAMFILES[10]' `
-                       -replace "\\", '$env:HOMEPATH[0]'
-
-    # Vérifier si la commande est identique après tentative d'obfuscation
-    if ($obfuscated -eq $cmd) {
-        Write-Host "`n⚠️  Aucun caractère spécifique n'a été modifié." -ForegroundColor Yellow
         Write-Host "💡 Exemples d'obfuscation possibles :" -ForegroundColor Cyan
-        Write-Host "   - Mettre des majuscules aléatoires : WhoAmI"
-        Write-Host "   - Ajouter des doubles apostrophes : who''ami"
-    } else {
-        Write-Host "`n🔹 Commande obfusquée :" -ForegroundColor Cyan
-        Write-Host $obfuscated
-    }
+        Write-Host "   - Mettre des majuscules aléatoires : WhoAmI" -ForegroundColor Yellow
+        Write-Host "   - Ajouter des guillements simples ou doubles : who''ami" -ForegroundColor Yellow
+        Write-Host "   - Ajouter, supprimer, modifier les commentaires de votre script" -ForegroundColor Yellow
+        Write-Host "   - Modifier les noms de toutes vos variables" -ForegroundColor Yellow
+        Write-Host "   - Obfuscations par la commande Get-Command. " -ForegroundColor Yellow
+        Write-Host "         Exemple : Write-Output Test = &(gcm W**************-*u*****************t) Test" -ForegroundColor Yellow
 }
 
 # Fonction d'inversion de la commande
@@ -28,7 +19,7 @@ function Reverse-Command {
     Write-Host $reversed
 
     Write-Host "`n💡 Pour exécuter votre commande, utilisez :" -ForegroundColor Yellow
-    Write-Host "iex `"`$('$reversed'[-1..-30] -join '')`"" -ForegroundColor Green
+    Write-Host "iex `"`$('$reversed'[-1..-300] -join '')`"" -ForegroundColor Green
 }
 
 # Fonction d'encodage Base64
