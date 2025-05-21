@@ -1,18 +1,21 @@
 # Obfuscation
 
-> **Un script pour faire de l'énumération en PenTest**  
-> Ce dépôt contient un outil pratique pour améliorer vos processus d'énumération lors de vos tests d'intrusion en vous appuyant sur le protocole RPC qui est présent lorsque vous rencontrer un AD.
-> Le script est écrit en **Bash** (Linux) pour effectuer différentes tâches d'énumération en PenTest.
+> **A script to obfuscate your commands**  
+> This repository contains Command Obfuscator Toolkit for Linux and Windows designed for Offensive Security practitioners. It provides multiple methods to transform shell commands for purposes such as bypassing basic input filters, evading signature-based detections, or demonstrating command injection vectors. 
 ---
 
-## 📋 Fonctionnalités
-- Propositions d'obfuscation diverses
-- Inversion de la commande avec la commande permettant de l'exécuter
-- Encodage de la commande en base64 avec la commande permettant de l'exécuter
+## 📋 Features
+- Various obfuscation and puprosals
+- Reversing the command with the command allowing its execution
+- Encoding the command in base64 with the command to execute it
 
 ---
 
-## 🚀 Comment utiliser ?
-1. Clonez ce dépôt sur votre machine :
+## 🚀 How to use?
+1. Clone this repository to your machine:
    ```bash
    git clone https://github.com/DrkR0ot/Obfuscation.git
+   ```
+## Warning: 
+1. These tools are used for educational purposes.
+2. The obfuscate commands will not work for any purpose other than command injection.
