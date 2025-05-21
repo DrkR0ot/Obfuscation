@@ -1,81 +1,81 @@
 #!/bin/bash
 
-# Fonction d'obfuscation de la commande
+# Command obfuscation function
 obfuscate_command() {
     local cmd="$1"
-    # Appliquer les remplacements
+    # Apply substitutions
     local obfuscated_cmd=$(echo "$cmd" | sed \
         -e 's/,/{ls,-la}/g' \
         -e 's/ /${IFS}/g' \
         -e 's/;/${LS_COLORS:10:1}/g' \
         -e 's#/#${PATH:0:1}#g')
 
-    # Vérifier si la commande a été modifiée
+    # Check if the command was modified
     if [[ "$obfuscated_cmd" == "$cmd" ]]; then
-        echo -e "\n⚠️  Aucun caractère spécifique n'a été modifié."
-        echo -e "💡 Exemples d'obfuscation possibles :"
-        echo -e "   - Mettre des majuscules aléatoires : WhoAmI"
-	echo -e '	Run la commande avec : $(a="WhOaMi";printf %s "${a,,}")'
-        echo -e "   - Ajouter des doubles apostrophes : who''ami"
-        echo -e "   - Ajouter au milieu de votre fonction \$@ ou encore \\. Exemple : who\$@am\\i"
+        echo -e "\n⚠️  No specific character was modified."
+        echo -e "💡 Possible obfuscation examples:"
+        echo -e "   - Use random uppercase letters: WhoAmI"
+        echo -e '	Run the command with: $(a="WhOaMi";printf %s "${a,,}")'
+        echo -e "   - Add double quotes: who''ami"
+        echo -e "   - Inject in the middle with \$@ or even \\. Example: who\$@am\\i"
     else
-        echo -e "\n🔹 Commande obfusquée :"
+        echo -e "\n🔹 Obfuscated command:"
         echo "$obfuscated_cmd"
     fi
 }
 
-# Fonction d'inversion de la commande
+# Command reversal function
 reverse_command() {
     local cmd="$1"
     local reversed_cmd=$(echo "$cmd" | rev)
 
-    echo -e "\n🔹 Commande inversée :"
+    echo -e "\n🔹 Reversed command:"
     echo "$reversed_cmd"
 
-    echo -e "\n💡 Pour exécuter votre commande, utilisez :"
+    echo -e "\n💡 To execute your command, use:"
     echo "\$(rev<<<'$reversed_cmd')"
 }
 
-# Fonction d'encodage Base64
+# Base64 encoding function
 encode_base64() {
     local cmd="$1"
     local encoded_cmd=$(echo -n "$cmd" | base64)
 
-    echo -e "\n🔹 Commande encodée en Base64 :"
+    echo -e "\n🔹 Command encoded in Base64:"
     echo "$encoded_cmd"
 
-    echo -e "\n💡 Pour exécuter votre commande, utilisez :"
+    echo -e "\n💡 To execute your command, use:"
     echo "bash -c \"\$(echo '$encoded_cmd' | base64 -d)\""
-    echo "Ou encore bash<<<\$(base64 -d<<<$encoded_cmd)"
+    echo "Or bash<<<\$(base64 -d<<<$encoded_cmd)"
 }
 
-# Menu interactif
+# Interactive menu
 while true; do
-    # Demande à l'utilisateur de saisir une commande
-    read -p "Entrez la commande à modifier : " cmd
+    # Ask the user to enter a command
+    read -p "Enter the command to modify: " cmd
 
-    # Vérifie si la commande est vide
+    # Check if the command is empty
     if [[ -z "$cmd" ]]; then
-        echo -e "❌ Erreur : Vous devez entrer une commande !"
+        echo -e "❌ Error: You must enter a command!"
         continue
     fi
 
-    echo -e "\n🔹 Que voulez-vous faire avec cette commande ?"
-    echo "1. Obfusquer la commande"
-    echo "2. Inverser la commande"
-    echo "3. Encoder en Base64"
-    echo "4. Quitter"
+    echo -e "\n🔹 What would you like to do with this command?"
+    echo "1. Obfuscate the command"
+    echo "2. Reverse the command"
+    echo "3. Encode in Base64"
+    echo "4. Quit"
 
-    # Demande le choix de l'utilisateur
-    read -p "Entrez votre choix (1-4) : " choice
+    # Ask for user's choice
+    read -p "Enter your choice (1-4): " choice
 
     case $choice in
         1) obfuscate_command "$cmd" ;;
         2) reverse_command "$cmd" ;;
         3) encode_base64 "$cmd" ;;
-        4) echo "👋 Au revoir !"; exit ;;
-        *) echo "❌ Option invalide, veuillez choisir entre 1 et 4." ;;
+        4) echo "👋 Goodbye!"; exit ;;
+        *) echo "❌ Invalid option, please choose between 1 and 4." ;;
     esac
 
-    echo -e "\n🔄 Retour au menu..."
+    echo -e "\n🔄 Returning to menu..."
 done
